@@ -1,8 +1,3 @@
-"""
-Test Activation Probing - MNIST
-Découvre où l'information de classe est encodée dans le réseau
-"""
-
 import torch
 import torch.nn as nn
 import torch.optim as optim
@@ -14,10 +9,7 @@ import numpy as np
 from tensight.analyzers.activation_probing import ActivationProber
 
 
-# ============ MODELS ============
-
 class DeepMLP(nn.Module):
-    """MLP profond pour voir l'évolution des représentations"""
     def __init__(self):
         super().__init__()
         self.flatten = nn.Flatten()
@@ -42,17 +34,14 @@ class DeepMLP(nn.Module):
 
 
 class SimpleCNN(nn.Module):
-    """CNN pour voir les features visuelles"""
     def __init__(self):
         super().__init__()
         self.conv1 = nn.Conv2d(1, 32, 3, padding=1)
         self.act1 = nn.ReLU()
         self.pool1 = nn.MaxPool2d(2)
-        
         self.conv2 = nn.Conv2d(32, 64, 3, padding=1)
         self.act2 = nn.ReLU()
         self.pool2 = nn.MaxPool2d(2)
-        
         self.flatten = nn.Flatten()
         self.fc1 = nn.Linear(64 * 7 * 7, 128)
         self.act3 = nn.ReLU()
@@ -67,8 +56,6 @@ class SimpleCNN(nn.Module):
         return x
 
 
-# ============ UTILS ============
-
 def load_mnist(batch_size=128):
     transform = transforms.Compose([
         transforms.ToTensor(),
@@ -76,14 +63,12 @@ def load_mnist(batch_size=128):
     ])
     train_data = datasets.MNIST('./data', train=True, download=True, transform=transform)
     test_data = datasets.MNIST('./data', train=False, transform=transform)
-    
     train_loader = DataLoader(train_data, batch_size=batch_size, shuffle=True)
     test_loader = DataLoader(test_data, batch_size=batch_size)
     return train_loader, test_loader
 
 
 def train_model(model, train_loader, epochs=3):
-    """Entraîne le modèle"""
     optimizer = optim.Adam(model.parameters(), lr=0.001)
     criterion = nn.CrossEntropyLoss()
     
@@ -96,7 +81,6 @@ def train_model(model, train_loader, epochs=3):
             loss = criterion(out, y)
             loss.backward()
             optimizer.step()
-            
             total_loss += loss.item()
             correct += (out.argmax(1) == y).sum().item()
             total += len(y)
@@ -108,23 +92,15 @@ def train_model(model, train_loader, epochs=3):
 
 
 def plot_probing_results(results_dict, filename):
-    """Visualise les résultats de probing pour plusieurs modèles"""
-    
     n_models = len(results_dict)
     fig, axes = plt.subplots(1, n_models + 1, figsize=(6 * (n_models + 1), 5))
     
-    all_data = {}
-    
     for idx, (model_name, results) in enumerate(results_dict.items()):
         ax = axes[idx]
-        
         layer_results = results['layer_results']
         layers = list(layer_results.keys())
         accs = [layer_results[l]['test_accuracy'] * 100 for l in layers]
         
-        all_data[model_name] = {'layers': layers, 'accs': accs}
-        
-        # Bar plot
         colors = plt.cm.viridis(np.linspace(0.2, 0.8, len(layers)))
         bars = ax.barh(range(len(layers)), accs, color=colors)
         ax.set_yticks(range(len(layers)))
@@ -135,14 +111,11 @@ def plot_probing_results(results_dict, filename):
         ax.axvline(x=10, color='red', linestyle='--', alpha=0.5, label='Random (10%)')
         ax.legend(fontsize=8)
         
-        # Add values on bars
         for bar, acc in zip(bars, accs):
-            ax.text(acc + 1, bar.get_y() + bar.get_height()/2, 
-                   f'{acc:.1f}%', va='center', fontsize=8)
+            ax.text(acc + 1, bar.get_y() + bar.get_height()/2, f'{acc:.1f}%', va='center', fontsize=8)
         
         ax.grid(axis='x', alpha=0.3)
     
-    # Summary plot
     ax = axes[-1]
     ax.axis('off')
     
@@ -150,8 +123,6 @@ def plot_probing_results(results_dict, filename):
 ╔═══════════════════════════════════════════╗
 ║       ACTIVATION PROBING SUMMARY          ║
 ╠═══════════════════════════════════════════╣
-║                                           ║
-║  💡 What this tells us:                   ║
 ║                                           ║
 ║  • Early layers: low accuracy             ║
 ║    → Raw features, no class info yet      ║
@@ -164,8 +135,7 @@ def plot_probing_results(results_dict, filename):
 ║                                           ║
 ╠═══════════════════════════════════════════╣
 ║                                           ║
-║  📊 Use cases:                            ║
-║                                           ║
+║  Use cases:                               ║
 ║  • Find where features emerge             ║
 ║  • Compare architectures                  ║
 ║  • Debug representation learning          ║
@@ -184,20 +154,16 @@ def plot_probing_results(results_dict, filename):
     print(f"✅ Saved: {filename}")
 
 
-# ============ MAIN ============
-
 def main():
     print("=" * 50)
     print("🔬 Activation Probing Analysis - MNIST")
     print("=" * 50)
     
-    # Load data
     print("\n📦 Loading MNIST...")
     train_loader, test_loader = load_mnist()
     
     results_dict = {}
     
-    # ===== Test 1: Deep MLP =====
     print("\n" + "-" * 50)
     print("🧠 Model 1: Deep MLP")
     print("-" * 50)
@@ -216,7 +182,6 @@ def main():
     )
     results_dict['Deep MLP'] = results_mlp
     
-    # ===== Test 2: CNN =====
     print("\n" + "-" * 50)
     print("🧠 Model 2: Simple CNN")
     print("-" * 50)
@@ -235,12 +200,10 @@ def main():
     )
     results_dict['Simple CNN'] = results_cnn
     
-    # ===== Visualize =====
     print("\n" + "-" * 50)
     print("📈 Generating visualization...")
     plot_probing_results(results_dict, 'probing_report.png')
     
-    # ===== Final Summary =====
     print("\n" + "=" * 50)
     print("📊 FINAL SUMMARY")
     print("=" * 50)
