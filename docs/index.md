@@ -6,16 +6,16 @@ Tensight provides powerful tools to understand, debug, and optimize your neural 
 
 ## ✨ Key Features
 
-### 🗺️ [Loss Landscape Analysis](features/loss-landscape.md)
+### 🗺️ [Loss Landscape Analysis](features/loss-landscape/)
 Visualize and analyze the geometry of the loss function around trained parameters. Identify sharp vs flat minima to understand generalization properties.
 
-### 📊 [Gradient Noise Scale](features/gradient-noise.md)
+### 📊 [Gradient Noise Scale](features/gradient-noise/)
 Determine optimal batch sizes by analyzing gradient noise. Based on the theory that optimal batch size scales with gradient noise.
 
-### 🔬 [Activation Probing](features/activation-probing.md)
+### 🔬 [Activation Probing](features/activation-probing/)
 Discover where class information is encoded in your network by training linear probes on intermediate activations.
 
-### 🛡️ [Pre-training Checks](features/precheck.md)
+### 🛡️ [Pre-training Checks](features/precheck/)
 Detect common issues before training: vanishing/exploding gradients, poor initialization, dead neurons, and more.
 
 ## 🚀 Quick Start
@@ -41,15 +41,15 @@ results = analyzer.analyze(num_points=21, range_val=1.0)
 print(f"Sharpness: {results['sharpness']:.4f}")
 ```
 
-👉 **[Get Started →](getting-started/installation.md)**
+👉 **[Get Started →](getting-started/installation/)**
 
 ## 📚 Documentation
 
-- **[Installation Guide](getting-started/installation.md)** - Get started with Tensight
-- **[Quick Start Tutorial](getting-started/quickstart.md)** - Your first analysis
-- **[Features Documentation](features/loss-landscape.md)** - Detailed feature guides
-- **[API Reference](api/analyzers.md)** - Complete API documentation
-- **[Examples](examples/mnist.md)** - Real-world examples
+- **[Installation Guide](getting-started/installation/)** - Get started with Tensight
+- **[Quick Start Tutorial](getting-started/quickstart/)** - Your first analysis
+- **[Features Documentation](features/loss-landscape/)** - Detailed feature guides
+- **[API Reference](api/analyzers/)** - Complete API documentation
+- **[Examples](examples/mnist/)** - Real-world examples
 
 ## 🔬 Research Background
 
@@ -61,7 +61,7 @@ Tensight implements techniques from cutting-edge research:
 
 ## 🤝 Contributing
 
-We welcome contributions! See our [Contributing Guide](contributing.md) for details.
+We welcome contributions! See our [Contributing Guide](contributing/) for details.
 
 ## 📝 License
 
@@ -70,3 +70,4 @@ This project is licensed under the MIT License.
 ---
 
 **Made with ❤️ for the deep learning community**
+
