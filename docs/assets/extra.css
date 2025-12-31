@@ -1,0 +1,138 @@
+/* Custom styles for Tensight documentation */
+
+:root {
+  --md-primary-fg-color: #7c3aed;
+  --md-primary-fg-color--light: #a78bfa;
+  --md-primary-fg-color--dark: #5b21b6;
+  --md-accent-fg-color: #9333ea;
+}
+
+/* Hero section styling */
+.md-typeset h1 {
+  font-weight: 700;
+  color: var(--md-primary-fg-color);
+}
+
+/* Code blocks */
+.md-typeset pre > code {
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* Cards grid */
+.grid.cards {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.grid.cards > * {
+  border: 1px solid var(--md-default-fg-color--lighter);
+  border-radius: 8px;
+  padding: 1.5rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.grid.cards > *:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* Admonitions */
+.md-typeset .admonition {
+  border-radius: 8px;
+  border-left-width: 4px;
+}
+
+/* Tables */
+.md-typeset table:not([class]) {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.md-typeset table:not([class]) th {
+  background-color: var(--md-primary-fg-color);
+  color: white;
+  font-weight: 600;
+}
+
+/* Buttons and links */
+.md-typeset a {
+  color: var(--md-primary-fg-color);
+  font-weight: 500;
+}
+
+.md-typeset a:hover {
+  color: var(--md-accent-fg-color);
+  text-decoration: underline;
+}
+
+/* Navigation */
+.md-nav__title {
+  font-weight: 600;
+}
+
+/* Search */
+.md-search__form {
+  border-radius: 20px;
+}
+
+/* Footer */
+.md-footer {
+  background-color: var(--md-primary-fg-color);
+}
+
+/* Custom gradient box */
+.gradient-box {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 10px;
+  padding: 2rem;
+  color: white;
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.gradient-box a {
+  display: inline-block;
+  padding: 0.75rem 2rem;
+  background: white;
+  color: #667eea;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: transform 0.2s;
+}
+
+.gradient-box a:hover {
+  transform: scale(1.05);
+  color: #764ba2;
+}
+
+/* Feature cards */
+.feature-card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 2rem;
+  margin: 1rem 0;
+  transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  transform: translateY(-2px);
+}
+
+/* Code highlighting */
+.highlight {
+  border-radius: 8px;
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+  .grid.cards {
+    grid-template-columns: 1fr;
+  }
+}
+
