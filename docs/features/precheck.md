@@ -33,23 +33,61 @@ else:
 ### Vanishing Gradients
 Gradients become too small, preventing learning in early layers.
 
+**Symptoms:**
+- Gradients near zero in early layers
+- Model doesn't learn
+
+**Solutions:**
+- Use better initialization (Xavier, He)
+- Add skip connections
+- Use different activation functions
+
 ### Exploding Gradients
 Gradients become too large, causing training instability.
+
+**Symptoms:**
+- Loss becomes NaN
+- Gradients explode
+
+**Solutions:**
+- Gradient clipping
+- Lower learning rate
+- Better initialization
 
 ### Dead Neurons
 Neurons that never activate, reducing model capacity.
 
+**Symptoms:**
+- Many neurons with zero activations
+- Reduced model capacity
+
+**Solutions:**
+- Use Leaky ReLU or other activations
+- Better initialization
+- Adjust learning rate
+
 ### Poor Initialization
 Weights initialized in a way that prevents effective learning.
 
+**Solutions:**
+- Use PyTorch's default initialization
+- Try Xavier or He initialization
+- Check weight distributions
+
 ### Learning Rate Issues
 Learning rate too high (unstable) or too low (slow convergence).
+
+**Solutions:**
+- Use learning rate finder
+- Start with recommended values
+- Use learning rate scheduling
 
 ## Example
 
 ```python
 from tensight import precheck
 import torch
+import torch.nn as nn
 
 model = nn.Sequential(
     nn.Linear(784, 256),
@@ -68,3 +106,26 @@ else:
         print(f"  - {issue}")
 ```
 
+## Advanced Usage
+
+### Check Specific Components
+
+```python
+# Check only gradients
+gradient_issues = precheck.check_gradients(model, data_loader)
+
+# Check only initialization
+init_issues = precheck.check_initialization(model)
+```
+
+### Custom Thresholds
+
+```python
+# Use custom thresholds
+issues = precheck.check_model(
+    model, 
+    sample_input,
+    gradient_threshold=1e-6,  # Custom threshold
+    activation_threshold=0.01
+)
+```

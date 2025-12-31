@@ -38,7 +38,7 @@ The `analyze()` method returns a dictionary with:
 
 Filter normalization (Li et al., 2018) ensures fair comparison across layers with different weight scales. **Always use `use_filter_norm=True`** for meaningful results.
 
-## Interpretation
+## Interpretation Guide
 
 | Sharpness | Interpretation | Generalization |
 |-----------|---------------|----------------|
@@ -60,7 +60,24 @@ else:
     print("⚠️ Model found a sharp minimum - may not generalize well")
 ```
 
+## Advanced Usage
+
+### Custom Grid Resolution
+
+```python
+# Higher resolution for detailed analysis
+results = analyzer.analyze(num_points=51, range_val=1.0)
+```
+
+### Different Perturbation Range
+
+```python
+# Smaller range for local analysis
+results = analyzer.analyze(num_points=21, range_val=0.5)
+```
+
 ## Research Reference
 
 Based on: "Visualizing the Loss Landscape of Neural Nets" (Li et al., NeurIPS 2018)
 
+[Read the paper →](https://arxiv.org/abs/1712.09913)

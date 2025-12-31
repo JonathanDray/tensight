@@ -80,7 +80,6 @@ for layer, res in results['layer_results'].items():
 
 ## Next Steps
 
-- Read the [Loss Landscape guide](../features/loss-landscape.md)
-- Check out [examples](../examples/mnist.md)
+- Read the detailed [Loss Landscape guide](../features/loss-landscape.md)
+- Check out [real-world examples](../examples/mnist.md)
 - Explore the [API reference](../api/analyzers.md)
-

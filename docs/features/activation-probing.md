@@ -33,7 +33,7 @@ The `probe()` method returns a dictionary with:
 - `best_layer`: Layer with highest probe accuracy
 - `worst_layer`: Layer with lowest probe accuracy
 
-## Interpretation
+## Interpretation Guide
 
 | Accuracy | Meaning |
 |----------|---------|
@@ -63,8 +63,59 @@ for layer, res in results['layer_results'].items():
 
 ## Use Cases
 
-- **Transfer Learning**: Find the best layer to extract features
-- **Architecture Comparison**: Compare how different architectures encode information
-- **Debugging**: Identify layers that aren't learning useful representations
-- **Interpretability**: Understand representation learning
+### Transfer Learning
 
+Find the best layer to extract features for transfer learning:
+
+```python
+results = prober.probe(...)
+best_layer = results['best_layer']
+print(f"Use {best_layer} for feature extraction")
+```
+
+### Architecture Comparison
+
+Compare how different architectures encode information:
+
+```python
+# Test different architectures
+for arch_name, model in architectures.items():
+    prober = ActivationProber(model)
+    results = prober.probe(...)
+    print(f"{arch_name}: Best layer = {results['best_layer']}")
+```
+
+### Debugging
+
+Identify layers that aren't learning useful representations:
+
+```python
+results = prober.probe(...)
+if results['worst_layer'] in ['layer3', 'layer4']:
+    print("⚠️ Middle layers may need attention")
+```
+
+## Advanced Usage
+
+### Custom Sample Limits
+
+```python
+# Use more samples for better accuracy
+results = prober.probe(
+    train_loader=train_loader,
+    test_loader=test_loader,
+    layer_names=['layer1', 'layer2'],
+    max_samples=5000  # More samples
+)
+```
+
+### Specific Layer Analysis
+
+```python
+# Probe only specific layers
+results = prober.probe(
+    train_loader=train_loader,
+    test_loader=test_loader,
+    layer_names=['fc1', 'fc2']  # Only fully connected layers
+)
+```

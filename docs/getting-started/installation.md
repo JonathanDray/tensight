@@ -51,3 +51,6 @@ pip install pytest  # For running tests
 pip install mkdocs mkdocs-material  # For documentation
 ```
 
+## Next Steps
+
+Once installed, check out the [Quick Start Guide](quickstart.md) to run your first analysis!

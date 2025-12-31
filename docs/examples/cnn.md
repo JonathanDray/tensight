@@ -28,7 +28,9 @@ class SimpleCNN(nn.Module):
         x = self.fc2(x)
         return x
 
+# Create and train model
 model = SimpleCNN()
+# ... training code ...
 
 # Probe activations
 prober = ActivationProber(model)
@@ -38,7 +40,29 @@ results = prober.probe(
     layer_names=['conv1', 'conv2', 'fc1', 'fc2']
 )
 
+# Print results
 for layer, res in results['layer_results'].items():
-    print(f"{layer}: {res['test_accuracy']*100:.1f}%")
+    acc = res['test_accuracy'] * 100
+    print(f"{layer}: {acc:.1f}%")
 ```
 
+## Expected Output
+
+```
+conv1: 82.9%
+conv2: 78.1%
+fc1: 96.7%
+fc2: 83.0%
+```
+
+## Interpretation
+
+- `conv1` and `conv2`: Lower accuracy (visual features, not class-specific)
+- `fc1`: Highest accuracy (class information fully encoded)
+- `fc2`: Lower accuracy (logits, less informative for probing)
+
+## Use Cases
+
+- **Transfer Learning**: Use `fc1` for feature extraction
+- **Architecture Analysis**: Compare different CNN architectures
+- **Layer Selection**: Choose best layer for downstream tasks

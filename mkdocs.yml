@@ -55,8 +55,8 @@ nav:
     - Installation: getting-started/installation.md
     - Quick Start: getting-started/quickstart.md
   - Features:
-    - Loss Landscape: features/loss-landscape.md
-    - Gradient Noise: features/gradient-noise.md
+    - Loss Landscape Analysis: features/loss-landscape.md
+    - Gradient Noise Scale: features/gradient-noise.md
     - Activation Probing: features/activation-probing.md
     - Pre-training Checks: features/precheck.md
   - API Reference:

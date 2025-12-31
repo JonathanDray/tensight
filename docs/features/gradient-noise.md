@@ -52,3 +52,22 @@ else:
 - Re-run analysis after significant training progress
 - Consider compute constraints when choosing batch size
 
+## Advanced Usage
+
+### More Accurate Estimates
+
+```python
+# Use more batches for better accuracy
+results = analyzer.analyze(num_batches=50)
+```
+
+### Batch Size Comparison
+
+```python
+# Test different batch sizes
+for batch_size in [16, 32, 64, 128]:
+    loader = DataLoader(dataset, batch_size=batch_size)
+    analyzer = GradientNoiseAnalyzer(model, criterion, loader)
+    results = analyzer.analyze()
+    print(f"Batch {batch_size}: Optimal = {results['optimal_batch_size']}")
+```
