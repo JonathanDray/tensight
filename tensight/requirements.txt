@@ -1,0 +1,12 @@
+# Core dependencies
+torch>=1.9.0
+numpy>=1.19.0
+
+# Visualization (optional)
+matplotlib>=3.3.0
+
+# Development (optional)
+pytest>=6.0
+
+# For MNIST tests
+torchvision>=0.10.0
