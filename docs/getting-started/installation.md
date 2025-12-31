@@ -2,55 +2,26 @@
 
 ## Requirements
 
-- Python 3.8 or higher
-- PyTorch 2.0 or higher
-- NumPy 1.21 or higher
-- Matplotlib 3.5 or higher
+- Python 3.9+
+- PyTorch 1.10+
 
-## Install from Source
+## Install via pip
 
 ```bash
-# Clone the repository
+pip install tensight
+```
+
+## Install from source
+
+```bash
 git clone https://github.com/JonathanDray/tensight.git
 cd tensight
-
-# Create virtual environment (recommended)
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Install in development mode
 pip install -e .
 ```
 
-## Verify Installation
+## Verify installation
 
 ```python
 import tensight
-from tensight.analyzers import LossLandscapeAnalyzer
-print("Tensight installed successfully!")
+print(tensight.__version__)
 ```
-
-## Dependencies
-
-The main dependencies are:
-
-- `torch>=2.0.0` - PyTorch deep learning framework
-- `torchvision>=0.15.0` - Vision datasets and transforms
-- `numpy>=1.21.0` - Numerical computations
-- `matplotlib>=3.5.0` - Visualizations
-
-## Development Installation
-
-For development, you may also want to install:
-
-```bash
-pip install pytest  # For running tests
-pip install mkdocs mkdocs-material  # For documentation
-```
-
-## Next Steps
-
-Once installed, check out the [Quick Start Guide](quickstart.md) to run your first analysis!
